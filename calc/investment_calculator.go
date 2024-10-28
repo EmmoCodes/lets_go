@@ -23,9 +23,9 @@ func main() {
 	outputText("Years Amount: ")
 	fmt.Scan(&years)
 
-	calcFutureValues(investmentAmount, expectedReturnRate, years)
-	futureValue := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
-	futureRealValue := futureValue / math.Pow(1+inflationRate/100, years)
+	futureValue, futureRealValue := calcFutureValues(investmentAmount, expectedReturnRate, years)
+	// futureValue := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
+	// futureRealValue := futureValue / math.Pow(1+inflationRate/100, years)
 
 	formattedFV := fmt.Sprintf("Future Value: %.1f\n", futureValue)
 	formattedRFV := fmt.Sprintf("Future Value (adjusted for Inflation): %.1f\n", futureRealValue)
@@ -38,8 +38,9 @@ func outputText(text string) {
 	fmt.Print(text)
 }
 
-func calcFutureValues(investmentAmount, expectedReturnRate, years float64) (float64, float64) {
-	fv := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
-	rfv := fv / math.Pow(1+inflationRate/100, years)
+func calcFutureValues(investmentAmount, expectedReturnRate, years float64) (fv float64, rfv float64) {
+	fv = investmentAmount * math.Pow(1+expectedReturnRate/100, years)
+	rfv = fv / math.Pow(1+inflationRate/100, years)
 	return fv, rfv
+	// "return" is enough cause we init the vars in func head
 }
